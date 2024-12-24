@@ -1,0 +1,4 @@
+@echo off
+
+if not exist build mkdir build
+g++ ../src/*.cpp test.cpp --std=c++17 --debug -Wall -o build/vy_reflection_test

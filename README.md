@@ -9,7 +9,7 @@ that said, the basic functionality _is_ there. just don't expect it to be adopte
 ## building
 vy_reflect makes extensive use of `inline static`s which were introduced in c++17. it is perfectly possible to back-port the code to work in older standards but that would require manual intervention.
 
-there is a code example under `test/`. in linux, you can build by running `test/build_test.sh`.
+there is a code example under `test/`. in linux, you can build by running `test/build_test.sh` (or the .batch file on windows).
 there are a bunch of warnings still in need of addressing but the thing does compile and run.
 the test build products will be generated in `test/build/`.
 
