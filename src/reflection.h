@@ -233,8 +233,8 @@ namespace vy::reflection
                 )
             : ReflectionFlags(InReflectionFlags),
               MemberType(InMemberType),
-              MemberOffset(InOffset),
-              MemberName(InMemberName)
+              MemberName(InMemberName),
+              MemberOffset(InOffset)
         {}
 
         // ObjectMember Method constructor
@@ -246,8 +246,8 @@ namespace vy::reflection
                 )
             : ReflectionFlags(InReflectionFlags),
               MemberType(InMemberType),
-              MemberMethodCaller(InMemberMethodCaller),
-              MemberName(InMemberName)
+              MemberName(InMemberName),
+              MemberMethodCaller(InMemberMethodCaller)
         {}
 
         // ObjectInheritanceData constructor
@@ -297,8 +297,8 @@ namespace vy::reflection
                 )
             : ReflectionFlags(InReflectionFlags),
             MemberType(InMemberType),
-            Offset(InOffset),
             MemberName(InMemberName),
+            Offset(InOffset),
             OwnerReflectionData(InOwnerReflectionData)
         {};
         ObjectMember(
@@ -310,8 +310,8 @@ namespace vy::reflection
                 )
             : ReflectionFlags(InReflectionFlags),
             MemberType(InMemberType),
-            MethodCaller(InMethodCaller),
             MemberName(InMemberName),
+            MethodCaller(InMethodCaller),
             OwnerReflectionData(InOwnerReflectionData)
         {
             assert(MethodCaller != nullptr);
@@ -609,7 +609,7 @@ namespace vy::reflection
 
         inline bool IsChildOf(const ReflectionData& Other) const
         {
-            printf("Class %s IsChildOf class %s\n", *ClassName, *Other.ClassName);
+            // printf("Class %s IsChildOf class %s\n", *ClassName, *Other.ClassName);
             return InheritanceLayout.FindByPredicate([&Other](const ObjectInheritanceData& OID)
                         { return OID.ClassReflectionData == &Other; } );
         };

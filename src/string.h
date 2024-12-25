@@ -27,6 +27,11 @@ namespace vy
             SetData(Data, CalcSize(Data));
         };
 
+        TString(const T* Data)
+        {
+            SetData(const_cast<T*>(Data), CalcSize(Data));
+        };
+
         TString(const TString<T>& Other)
         {
             SetData(Other.Data, Other.Size);
