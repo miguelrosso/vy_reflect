@@ -7,10 +7,26 @@ class Object
 };
 #define BASE_REFLECTION_CLASS_DEFINED
 
-class TestClass : public Object
+class TestBaseClass : public Object
 {
 public:
-    TestClass(int InIntVariable, float InFloatVariable)
+
+    virtual void VirtualMethod()
+    {
+        VY_LOG("TestBaseClass::VirtualMethod called");
+    };
+
+    REFLECT_CLASS(
+        TestBaseClass,
+        REFLECT_INHERIT(Object),
+        REFLECT_METHOD(VirtualMethod)
+    )
+}
+
+class TestDerivedClass : public TestBaseClass
+{
+public:
+    TestDerivedClass(int InIntVariable, float InFloatVariable)
         : IntVariable(InIntVariable),
           FloatVariable(InFloatVariable)
     {};
@@ -21,29 +37,42 @@ public:
     void VoidMethod() 
     {
         VY_LOG("TestClass::VoidMethod called!\n");
-    }
+    };
 
-    int Sum(int A)
+    void Sum(int A, int& OutValue)
     {
-        return IntVariable + A;
-    }
+        OutValue =  IntVariable + A;
+    };
+
+    void VirtualMethod() override
+    {
+        VY_LOG("TestDerivedClass::VirtualMethod called");
+    };
 
     REFLECT_CLASS(
-        TestClass,
-        REFLECT_INHERIT(Object),
+        TestDerivedClass,
+        REFLECT_INHERIT(TestBaseClass),
         REFLECT_FIELD(IntVariable),
         REFLECT_FIELD(FloatVariable),
         REFLECT_METHOD(VoidMethod),
-        REFLECT_METHOD(Sum)
+        REFLECT_METHOD(Sum),
     )
 };
 
 
 int main()
 {
-    TestClass Tester { 5, 20.05f };
+    TestDerivedClass Tester { 5, 20.05f };
 
     Tester.PrintReflectionData();
+
+    Tester.InvokeMethod("VoidMethod");
+
+    int result;
+    Tester.InvokeMethod("Sum", 2, result);
+    VY_LOGF("Sum method invokation returned: %i", result);
+
+    Tester.InvokeMethod("VirtualMethod");
 
     return 0;
 }
