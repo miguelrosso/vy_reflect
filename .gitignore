@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# sample build folder
+build/
